@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
-import RepositoryItem from './RepositoryItem';
+import RepositoryItem from './repoItem/RepositoryItem';
 
 const styles = StyleSheet.create({
   separator: {
