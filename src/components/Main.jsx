@@ -1,10 +1,10 @@
 import React from 'react';
-//import Constants from 'expo-constants';
-import theme from '../theme';
+import { Route, Switch } from 'react-router-native';
 import { StyleSheet, View } from 'react-native';
 import RepositoryList from './RepositoryList';
-//import Subheading from './Subheading';
 import AppBar from './AppBar';
+import theme from '../theme';
+import SignIn from './SingIn';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,11 +17,17 @@ const styles = StyleSheet.create({
 const Main = () => {
   return (
     <View style={styles.container}>
-      <AppBar header='Repositories'/>
-
-      <View>
-        <RepositoryList />
-      </View>
+      <AppBar />
+      <Switch>
+        <Route path="/" exact>
+          <RepositoryList />
+        </Route>
+      </Switch>
+      <Switch>
+        <Route path="/SignIn" exact>
+          <SignIn />
+        </Route>
+      </Switch>
     </View>
   );
 };
