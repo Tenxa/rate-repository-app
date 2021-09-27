@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 import theme from '../theme';
-import SignIn from './SingIn';
+import SignIn from './signIn/SignIn';
 
 const styles = StyleSheet.create({
   container: {

@@ -21,7 +21,6 @@ const AppBar = () => {
         <AppBarTab to="/">Repositories</AppBarTab>
         <AppBarTab to="/SignIn">Sign In</AppBarTab>
       </ScrollView>
-
     </View>
   );
 };

@@ -15,8 +15,6 @@ const styles = StyleSheet.create({
 });
 
 const AppBarTab = ({ children, to }) => {
-
-
   return (
     <Pressable>
       <Link to={to}>
@@ -28,7 +26,6 @@ const AppBarTab = ({ children, to }) => {
           {children}
         </Text>
       </Link>
-
     </Pressable>
   );
 
