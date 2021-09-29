@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import useSignIn from '../../hooks/useSignin';
 import SignInForm from './SignInForm';
 
 const styles = StyleSheet.create({
@@ -10,10 +11,18 @@ const styles = StyleSheet.create({
 });
 
 const SignIn = () => {
-  const onSubmit = values => {
-    const username = (values.username);
-    const password = (values.password);
-    console.log(`username: ${username}, password ${password}`);
+  const [signIn] = useSignIn();
+
+  const onSubmit = async (values) => {
+    const { username, password } = values;
+    console.log(username, password);
+
+    try {
+      const data = await signIn({ username, password });
+      console.log(`form data: ${data.authorize.accessToken}`);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
