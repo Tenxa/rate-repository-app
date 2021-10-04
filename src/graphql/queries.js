@@ -13,3 +13,12 @@ ${CORE_REPOSITORY_FIELDS}
     }
   }
 `;
+
+export const GET_USER = gql`
+  {
+    authorizedUser {
+      id
+      username
+    }
+  }
+`;

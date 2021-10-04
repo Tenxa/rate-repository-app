@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import { useHistory } from 'react-router';
 import useSignIn from '../../hooks/useSignin';
 import SignInForm from './SignInForm';
 
@@ -12,14 +13,15 @@ const styles = StyleSheet.create({
 
 const SignIn = () => {
   const [signIn] = useSignIn();
+  const history = useHistory();
 
   const onSubmit = async (values) => {
     const { username, password } = values;
-    console.log(username, password);
 
     try {
-      const data = await signIn({ username, password });
-      console.log(`form data: ${data.authorize.accessToken}`);
+      await signIn({ username, password });
+      //console.log(`form data: ${data.authorize.accessToken}`);
+      history.push('/');
     } catch (e) {
       console.log(e);
     }
