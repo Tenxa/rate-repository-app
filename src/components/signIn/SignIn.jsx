@@ -20,7 +20,6 @@ const SignIn = () => {
 
     try {
       await signIn({ username, password });
-      //console.log(`form data: ${data.authorize.accessToken}`);
       history.push('/');
     } catch (e) {
       console.log(e);

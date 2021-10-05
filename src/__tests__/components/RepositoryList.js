@@ -50,9 +50,7 @@ describe('RepositoryList', () => {
       };
 
       // Add your test code here
-      const { debug, getAllByTestId } = render(<RepositoryListContainer repositories={repositories} />);
-
-      debug();
+      const { getAllByTestId } = render(<RepositoryListContainer repositories={repositories} />);
 
       const name = getAllByTestId('fullNameField');
       const description = getAllByTestId('descriptionField');
