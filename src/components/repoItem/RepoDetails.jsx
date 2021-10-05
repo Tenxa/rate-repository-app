@@ -16,10 +16,10 @@ const styles = StyleSheet.create({
 const RepoDetails = ({ styleContainer, styleItem, fullName, description, language }) => {
   return (
     <View style={styleContainer}>
-      <Text style={styleItem} fontSize='subheading' fontWeight='bold'>{fullName}</Text>
-      <Text style={styleItem} color='textSecondary'>{description}</Text>
+      <Text testID={'fullNameField'} style={styleItem} fontSize='subheading' fontWeight='bold'>{fullName}</Text>
+      <Text testID={'descriptionField'} style={styleItem} color='textSecondary'>{description}</Text>
       <View style={styleItem}>
-        <Text style={styles.languageText}>{language}</Text>
+        <Text testID={'languageField'} style={styles.languageText}>{language}</Text>
       </View>
     </View>
   );

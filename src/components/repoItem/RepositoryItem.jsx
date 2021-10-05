@@ -45,10 +45,11 @@ const styles = StyleSheet.create({
 const RepositoryItem = ({ fullName, description, language,
   stargazersCount, forksCount, reviewCount, ratingAverage, ownerAvatarUrl }) => {
   return (
-    <View style={styles.flexContainer}>
+    <View testID={'id'} style={styles.flexContainer}>
       <View style={styles.flexTop}>
         <View style={styles.flexTopLeft}>
           <Image
+            testID={'image'}
             style={styles.tinyLogo}
             source={{
               uri: ownerAvatarUrl,
@@ -60,10 +61,10 @@ const RepositoryItem = ({ fullName, description, language,
       </View>
 
       <View style={styles.flexBottom}>
-        <RepositoryNumber number={stargazersCount} text='Stars' />
-        <RepositoryNumber number={forksCount} text='Forks' />
-        <RepositoryNumber number={reviewCount} text='Reviews' />
-        <RepositoryNumber number={ratingAverage} text='Rating' />
+        <RepositoryNumber testID={`starsField`} number={stargazersCount} text='Stars' />
+        <RepositoryNumber testID={`forksField`} number={forksCount} text='Forks' />
+        <RepositoryNumber testID={`reviewsField`} number={reviewCount} text='Reviews' />
+        <RepositoryNumber testID={`ratingField`} number={ratingAverage} text='Rating' />
       </View>
 
     </View>
