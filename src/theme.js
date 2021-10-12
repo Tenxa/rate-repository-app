@@ -28,6 +28,12 @@ const theme = {
     normal: '400',
     bold: '700',
   },
+  blueBtn: {
+    backgroundColor: '#0366d6',
+    color: 'white',
+    padding: 3.5,
+    borderRadius: 3
+  }
 };
 
 export default theme;

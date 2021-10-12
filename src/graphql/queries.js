@@ -22,3 +22,13 @@ export const GET_USER = gql`
     }
   }
 `;
+
+export const GET_REPOSITORY_BY_ID = gql`
+${CORE_REPOSITORY_FIELDS}
+  query repository($id: ID!) {
+    repository(id: $id) {
+      ...CoreRepositoryFields
+      url
+    }
+  }
+`;

@@ -4,12 +4,7 @@ import Text from '../Text';
 import theme from '../../theme';
 
 const styles = StyleSheet.create({
-  languageText: {
-    backgroundColor: theme.backGroundColors.languageText,
-    color: 'white',
-    padding: 3.5,
-    borderRadius: 3
-  },
+  languageText: theme.blueBtn,
 });
 
 

@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, Text, Pressable } from 'react-native';
 import theme from '../../theme';
 import RepositoryNumber from './RepositoryNumber';
 import RepoDetails from './RepoDetails';
+import * as Linking from 'expo-linking';
+
 
 const styles = StyleSheet.create({
   flexContainer: {
@@ -39,13 +41,29 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
   },
+  bottomBtn: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: theme.blueBtn.backgroundColor,
+    borderRadius: theme.blueBtn.borderRadius,
+  },
+  buttonTxt: {
+    color: 'white',
+    fontSize: theme.fontSizes.body,
+    fontWeight: theme.fontWeights.bold
+  }
 });
 
 
 const RepositoryItem = ({ fullName, description, language,
-  stargazersCount, forksCount, reviewCount, ratingAverage, ownerAvatarUrl }) => {
+stargazersCount, forksCount, reviewCount, ratingAverage, ownerAvatarUrl, url, clicked }) => {
+
+
   return (
-    <View testID={'id'} style={styles.flexContainer}>
+    <View style={styles.flexContainer}>
       <View style={styles.flexTop}>
         <View style={styles.flexTopLeft}>
           <Image
@@ -66,6 +84,16 @@ const RepositoryItem = ({ fullName, description, language,
         <RepositoryNumber testID={`reviewsField`} number={reviewCount} text='Reviews' />
         <RepositoryNumber testID={`ratingField`} number={ratingAverage} text='Rating' />
       </View>
+
+      {clicked ?
+        <View style={styles.bottomBtn}>
+          <Pressable onPress={() => Linking.openURL(url)}>
+            <Text style={styles.buttonTxt}>
+              Open in GitHub
+            </Text>
+          </Pressable>
+        </View>
+        : null}
 
     </View>
   );
