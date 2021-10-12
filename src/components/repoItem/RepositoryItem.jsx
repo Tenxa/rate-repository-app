@@ -7,12 +7,7 @@ import * as Linking from 'expo-linking';
 
 
 const styles = StyleSheet.create({
-  flexContainer: {
-    display: 'flex',
-    backgroundColor: theme.backGroundColors.repositoryItem,
-    padding: 10,
-    width: '100%',
-  },
+  flexContainer: theme.itemContainer,
   flexTop: {
     display: 'flex',
     flexDirection: 'row',
@@ -51,7 +46,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.blueBtn.borderRadius,
   },
   buttonTxt: {
-    color: 'white',
+    color: theme.itemContainer.backgroundColor,
     fontSize: theme.fontSizes.body,
     fontWeight: theme.fontWeights.bold
   }

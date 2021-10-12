@@ -33,6 +33,12 @@ const theme = {
     color: 'white',
     padding: 3.5,
     borderRadius: 3
+  },
+  itemContainer: {
+    display: 'flex',
+    backgroundColor: 'white',
+    padding: 10,
+    width: '100%',
   }
 };
 

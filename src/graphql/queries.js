@@ -29,6 +29,20 @@ ${CORE_REPOSITORY_FIELDS}
     repository(id: $id) {
       ...CoreRepositoryFields
       url
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
     }
   }
 `;

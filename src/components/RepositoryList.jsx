@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 });
 
 
-const ItemSeparator = () => <View style={styles.separator} />;
+export const ItemSeparator = () => <View style={styles.separator} />;
 
 const RenderItem = ({ item }) => {
   const history = useHistory();
