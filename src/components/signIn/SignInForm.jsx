@@ -2,46 +2,18 @@ import React from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import theme from '../../theme';
-import { Pressable, View, Text, StyleSheet } from 'react-native';
-import FormikTextInput from '../FormikUtil/FormikTextInput';
+import { Pressable, View, StyleSheet } from 'react-native';
+import Text from '../Text';
+import FormikTextInput from '../../utils/FormikUtil/FormikTextInput';
 
 
 const styles = StyleSheet.create({
-  signInForm: {
-    padding: 10,
-    flexGrow: 1,
-    flexShrink: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: theme.backGroundColors.repositoryItem,
-  },
-  FormItems: {
-    margin: 5,
-    padding: 10,
-    borderColor: theme.backGroundColors.main,
-    borderRadius: 3,
-    borderWidth: 1
-  },
-  formError: {
-    margin: 5,
-    padding: 10,
-    borderColor: '#d73a4a',
-    borderRadius: 3,
-    borderWidth: 1
-  },
-  pressable: {
-    margin: 5,
-    padding: 10,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: theme.backGroundColors.languageText,
-    borderColor: theme.backGroundColors.languageText,
-    borderRadius: 3,
-    borderWidth: 1
-  },
+  signInForm: theme.formView,
+  FormItems: theme.formItems,
+  formError: theme.formError,
+  pressable: theme.formPressable,
   pressableText: {
-    color: theme.backGroundColors.repositoryItem,
+    color: theme.itemContainer.backgroundColor,
   }
 });
 
@@ -73,7 +45,7 @@ const SignInForm = ({ onSubmit }) => {
         <FormikTextInput testID='usernameField' name="username" placeholder="Username" style={errors.username ? styles.formError : styles.FormItems}/>
         <FormikTextInput testID='passwordField' name="password" placeholder="Password" secureTextEntry={true} style={errors.password ? styles.formError : styles.FormItems}/>
         <Pressable testID='submitButton' onPress={handleSubmit} style={styles.pressable}>
-          <Text style={styles.pressableText}>Sign in</Text>
+          <Text style={styles.pressableText} fontWeight='bold'>Sign in</Text>
         </Pressable>
       </View>
       }

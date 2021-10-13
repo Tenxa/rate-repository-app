@@ -6,6 +6,7 @@ import AppBar from './AppBar';
 import theme from '../theme';
 import SignIn from './signIn/SignIn';
 import SingleRepository from './repoItem/SingleRepository';
+import ReviewView from './review/ReviewView';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,6 +30,9 @@ const Main = () => {
         </Route>
         <Route path="/repositories/:id">
           <SingleRepository/>
+        </Route>
+        <Route>
+          <ReviewView/>
         </Route>
       </Switch>
     </View>

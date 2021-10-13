@@ -39,6 +39,39 @@ const theme = {
     backgroundColor: 'white',
     padding: 10,
     width: '100%',
+  },
+  formView: {
+    padding: 10,
+    flexGrow: 1,
+    flexShrink: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: 'white',
+  },
+  formItems: {
+    margin: 5,
+    padding: 10,
+    borderColor: '#e1e4e8',
+    borderRadius: 3,
+    borderWidth: 1
+  },
+  formError: {
+    margin: 5,
+    padding: 10,
+    borderColor: '#d73a4a',
+    borderRadius: 3,
+    borderWidth: 1
+  },
+  formPressable: {
+    margin: 5,
+    padding: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#0366d6',
+    borderColor: '#0366d6',
+    borderRadius: 3,
+    borderWidth: 1
   }
 };
 
