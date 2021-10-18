@@ -2,13 +2,11 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useHistory } from 'react-router';
 import useSignIn from '../../hooks/useSignin';
+import theme from '../../theme';
 import SignInForm from './SignInForm';
 
 const styles = StyleSheet.create({
-  signView: {
-    display: 'flex',
-    flexDirection: 'row',
-  }
+  signView: theme.flexRow
 });
 
 const SignIn = () => {

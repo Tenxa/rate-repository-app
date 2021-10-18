@@ -72,6 +72,10 @@ const theme = {
     borderColor: '#0366d6',
     borderRadius: 3,
     borderWidth: 1
+  },
+  flexRow: {
+    display: 'flex',
+    flexDirection: 'row',
   }
 };
 

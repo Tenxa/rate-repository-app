@@ -29,7 +29,7 @@ const AppBar = () => {
   const signOut = async () => {
     await authStorage.removeAccessToken();
     await apolloClient.resetStore();
-    await history.push('/SignIn');
+    await history.push('/signIn');
   };
 
 
@@ -38,15 +38,15 @@ const AppBar = () => {
       <ScrollView horizontal>
         <AppBarTab to="/">Repositories</AppBarTab>
         <AppBarTab to="/review">Create a review</AppBarTab>
-        <AppBarTab onPress={signOut} to="/SignOut">Sign Out</AppBarTab>
+        <AppBarTab onPress={signOut} to="/signOut">Sign Out</AppBarTab>
       </ScrollView>
     </View>
     :
     <View style={styles.container}>
       <ScrollView horizontal>
         <AppBarTab to="/">Repositories</AppBarTab>
-        <AppBarTab to="/SignIn">Sign In</AppBarTab>
-        
+        <AppBarTab to="/signIn">Sign in</AppBarTab>
+        <AppBarTab to="/signUp">Sign up</AppBarTab>
       </ScrollView>
     </View>;
 

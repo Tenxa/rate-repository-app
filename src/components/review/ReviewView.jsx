@@ -2,13 +2,11 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { useHistory } from "react-router";
 import useCreateReview from "../../hooks/useCreateReview";
+import theme from "../../theme";
 import ReviewForm from "./ReviewForm";
 
 const styles = StyleSheet.create({
-  reviewView: {
-    display: 'flex',
-    flexDirection: 'row',
-  }
+  reviewView: theme.flexRow
 });
 
 const ReviewView = () => {
