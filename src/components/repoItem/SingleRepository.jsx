@@ -4,7 +4,7 @@ import Text from '../Text';
 import { useParams } from 'react-router';
 import useRepository from '../../hooks/useRepository';
 import theme from '../../theme';
-import { ItemSeparator } from '../RepositoryList';
+import { ItemSeparator } from '../repositoryList/RepositoryListContainer';
 import RepositoryItem from './RepositoryItem';
 import { format } from 'date-fns';
 
