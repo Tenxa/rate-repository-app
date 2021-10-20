@@ -10,8 +10,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     flexWrap: "wrap",
-    padding: 20
+    paddingBottom: 10,
+    paddingTop: 25,
+    paddingRight: 10,
+    paddingLeft: 5
   },
+  //Triangle that points down
   triangle: {
     borderTopWidth: 5,
     borderRightWidth: 5,

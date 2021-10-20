@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { FlatList, View, StyleSheet, Pressable } from 'react-native';
+import { useDebounce } from 'use-debounce';
 import RepositoryItem from './repoItem/RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
 import { useHistory } from 'react-router';
-import SortPressable from './picker/SortPressable';
+import SearchAndSort from './picker/SearchAndSort';
 
 const styles = StyleSheet.create({
   separator: {
@@ -28,7 +29,8 @@ const RenderItem = ({ item }) => {
   );
 };
 
-export const RepositoryListContainer = ({ repositories, selectedSort, setSelectedSort }) => {
+export const RepositoryListContainer = ({ repositories, selectedSort, setSelectedSort, searchQuery, setSearchQuery }) => {
+  //const props = { repositories, selectedSort, setSelectedSort, searchQuery, setSearchQuery };
 
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
@@ -41,7 +43,7 @@ export const RepositoryListContainer = ({ repositories, selectedSort, setSelecte
         ItemSeparatorComponent={ItemSeparator}
         renderItem={({ item }) => <RenderItem item={item} />}
         keyExtractor={item => item.id}
-        ListHeaderComponent={<SortPressable selectedSort={selectedSort} setSelectedSort={setSelectedSort} />}
+        ListHeaderComponent={<SearchAndSort selectedSort={selectedSort} setSelectedSort={setSelectedSort} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />}
       />
     </View>
   );
@@ -49,31 +51,35 @@ export const RepositoryListContainer = ({ repositories, selectedSort, setSelecte
 
 const RepositoryList = () => {
   const [selectedSort, setSelectedSort] = useState("Latest repositories");
-  
+  const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedSearch] = useDebounce(searchQuery, 500);
+
   const sortParameters = (selectedSort) => {
     switch (selectedSort) {
       case 'Latest repositories': {
-        return { orderBy: 'CREATED_AT', orderDirection: 'DESC' };
+        return { orderBy: 'CREATED_AT', orderDirection: 'DESC', searchKeyword: debouncedSearch };
       }
       case 'Highest rated repositories': {
-        return { orderBy: 'RATING_AVERAGE', orderDirection: 'DESC' };
+        return { orderBy: 'RATING_AVERAGE', orderDirection: 'DESC', searchKeyword: debouncedSearch };
       }
       case 'Lowest rated repositories': {
-        return { orderBy: 'RATING_AVERAGE', orderDirection: 'ASC' };
+        return { orderBy: 'RATING_AVERAGE', orderDirection: 'ASC', searchKeyword: debouncedSearch };
       }
       default: {
-        return { orderBy: 'CREATED_AT', orderDirection: 'DESC' };
+        return { orderBy: 'CREATED_AT', orderDirection: 'DESC', searchKeyword: debouncedSearch };
       }
     }
   };
 
   const { repositories } = useRepositories(sortParameters(selectedSort));
-
+  
   return (
     <RepositoryListContainer
       repositories={repositories}
       selectedSort={selectedSort}
       setSelectedSort={setSelectedSort}
+      searchQuery={searchQuery}
+      setSearchQuery={setSearchQuery}
     />
   );
 };
