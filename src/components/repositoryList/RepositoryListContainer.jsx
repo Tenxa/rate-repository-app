@@ -26,7 +26,14 @@ const RenderItem = ({ item }) => {
   );
 };
 
-const RepositoryListContainer = ({ repositories, selectedSort, setSelectedSort, searchQuery, setSearchQuery }) => {
+const RepositoryListContainer = ({
+  repositories,
+  selectedSort,
+  setSelectedSort,
+  searchQuery,
+  setSearchQuery,
+  onEndReach
+}) => {
 
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
@@ -39,7 +46,16 @@ const RepositoryListContainer = ({ repositories, selectedSort, setSelectedSort, 
         ItemSeparatorComponent={ItemSeparator}
         renderItem={({ item }) => <RenderItem item={item} />}
         keyExtractor={item => item.id}
-        ListHeaderComponent={<SearchAndSort selectedSort={selectedSort} setSelectedSort={setSelectedSort} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
+        ListHeaderComponent={
+          <SearchAndSort
+            selectedSort={selectedSort}
+            setSelectedSort={setSelectedSort}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
+        }
       />
     </View>
   );

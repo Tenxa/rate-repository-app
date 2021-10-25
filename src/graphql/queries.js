@@ -7,17 +7,26 @@ ${CORE_REPOSITORY_FIELDS}
     $orderBy: AllRepositoriesOrderBy
     $orderDirection: OrderDirection
     $searchKeyword: String
+    $first: Int
+    $after: String
     ) {
     repositories (
       orderBy: $orderBy
       orderDirection: $orderDirection
       searchKeyword: $searchKeyword
+      first: $first
+      after: $after
       ) {
-      edges {
-        node {
-          ...CoreRepositoryFields
+        pageInfo {
+          hasNextPage
+          startCursor
+          endCursor
         }
-      }
+        edges {
+          node {
+            ...CoreRepositoryFields
+          }
+        }
     }
   }
 `;
@@ -33,22 +42,36 @@ export const GET_USER = gql`
 
 export const GET_REPOSITORY_BY_ID = gql`
 ${CORE_REPOSITORY_FIELDS}
-  query repository($id: ID!) {
+  query repository(
+    $id: ID!
+    $first: Int
+    $after: String
+    ) {
     repository(id: $id) {
       ...CoreRepositoryFields
       url
-      reviews {
+      reviews (
+        first: $first
+        after: $after
+        ) {
         edges {
           node {
             id
             text
             rating
             createdAt
+            repositoryId
             user {
               id
               username
             }
           }
+          cursor
+        }
+        pageInfo {
+          endCursor
+          startCursor
+          hasNextPage
         }
       }
     }

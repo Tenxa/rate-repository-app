@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import useRepositories from '../../hooks/useRepositories';
+import * as UTIL from '../../utils/sortParameters';
 import RepositoryListContainer from './RepositoryListContainer';
 
 
@@ -9,24 +10,17 @@ const RepositoryList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedSearch] = useDebounce(searchQuery, 500);
 
-  const sortParameters = (selectedSort) => {
-    switch (selectedSort) {
-      case 'Latest repositories': {
-        return { orderBy: 'CREATED_AT', orderDirection: 'DESC', searchKeyword: debouncedSearch };
-      }
-      case 'Highest rated repositories': {
-        return { orderBy: 'RATING_AVERAGE', orderDirection: 'DESC', searchKeyword: debouncedSearch };
-      }
-      case 'Lowest rated repositories': {
-        return { orderBy: 'RATING_AVERAGE', orderDirection: 'ASC', searchKeyword: debouncedSearch };
-      }
-      default: {
-        return { orderBy: 'CREATED_AT', orderDirection: 'DESC', searchKeyword: debouncedSearch };
-      }
-    }
-  };
+  const { orderBy, orderDirection, searchKeyword } = UTIL.sortParameters(selectedSort, debouncedSearch);
+  const { repositories, fetchMore } = useRepositories({
+    orderBy,
+    orderDirection,
+    searchKeyword,
+    first: 5
+  });
 
-  const { repositories } = useRepositories(sortParameters(selectedSort));
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   return (
     <RepositoryListContainer
@@ -35,6 +29,7 @@ const RepositoryList = () => {
       setSelectedSort={setSelectedSort}
       searchQuery={searchQuery}
       setSearchQuery={setSearchQuery}
+      onEndReach={onEndReach}
     />
   );
 };

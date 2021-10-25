@@ -8,7 +8,6 @@ import SignIn from './signIn/SignIn';
 import SingleRepository from './repoItem/SingleRepository';
 import ReviewView from './review/ReviewView';
 import SignUpView from './signUp/SignUpView';
-//import SortPicker from './picker/SortPicker';
 
 const styles = StyleSheet.create({
   container: {
