@@ -1,44 +1,11 @@
 import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
-import Text from '../Text';
+import { View } from 'react-native';
 import { useParams } from 'react-router';
 import useRepository from '../../hooks/useRepository';
-import theme from '../../theme';
 import { ItemSeparator } from '../repositoryList/RepositoryListContainer';
 import RepositoryItem from './RepositoryItem';
-import { format } from 'date-fns';
-
-const styles = StyleSheet.create({
-  itemContainer: theme.itemContainer,
-  flexTop: {
-    display: 'flex',
-    flexDirection: 'row',
-    width: '90%',
-    flexGrow: 1,
-    paddingRight: 10,
-  },
-  flexTopLeft: {
-    display: 'flex',
-    paddingBottom: 25
-  },
-  flexTopRight: {
-    paddingLeft: 10,
-    display: 'flex',
-    alignItems: 'flex-start',
-  },
-  topRightItems: {
-    padding: 2.5,
-  },
-  tinyLogo: {
-    width: 50,
-    height: 50,
-    borderRadius: 50/2,
-    borderWidth: 2.5,
-    borderColor: theme.colors.primary,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-});
+//import ReviewItem from '../review/ReviewItem';
+import ReviewList from '../review/ReviewList';
 
 
 const RepositoryInfo = ({ repository }) => {
@@ -46,31 +13,6 @@ const RepositoryInfo = ({ repository }) => {
     <View>
       <RepositoryItem {...repository} clicked={true} />
       <ItemSeparator />
-    </View>
-  );
-};
-
-const ReviewItem = ({ review }) => {
-  // Single review item
-  const formattedDate = format(new Date(review.createdAt), "dd.MM.yyyy");
-
-  return (
-    <View style={styles.itemContainer}>
-      <View style={styles.flexTop}>
-        <View style={styles.flexTopLeft}>
-          <View style={styles.tinyLogo}>
-            <Text color={'primary'} fontSize='subheading' fontWeight='bold'>{review.rating}</Text>
-          </View>
-          
-        </View>
-        <View style={styles.flexTopRight}>
-          <Text style={styles.topRightItems} fontSize='subheading' fontWeight='bold'>{review.user.username}</Text>
-          <Text style={styles.topRightItems} color='textSecondary'>{formattedDate}</Text>
-          <Text style={styles.topRightItems} fontSize='subheading'>{review.text}</Text>
-        </View>
-
-      </View>
-
     </View>
   );
 };
@@ -91,16 +33,24 @@ const SingleRepository = () => {
     ? repository.reviews.edges.map((edge) => edge.node)
     : [];
 
+  /* <FlatList
+      data={reviewNodes}
+      renderItem={({ item }) => <ReviewItem review={item} />}
+      keyExtractor={({ id }) => id}
+      ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
+      ItemSeparatorComponent={ItemSeparator}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
+    /> */
+
   return (
-      <FlatList
-        data={reviewNodes}
-        renderItem={({ item }) => <ReviewItem review={item} />}
-        keyExtractor={({ id }) => id}
-        ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
-        ItemSeparatorComponent={ItemSeparator}
-        onEndReached={onEndReach}
-        onEndReachedThreshold={0.5}
-      />
+    <ReviewList
+      reviews={reviewNodes}
+      ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
+      onEndReach={onEndReach}
+      onEndReachedThreshold={0.5}
+    />
+
   );
 };
 

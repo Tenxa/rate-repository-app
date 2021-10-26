@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { CORE_REPOSITORY_FIELDS } from './fragments';
+import { CORE_REPOSITORY_FIELDS, REVIEW_NODE_FIELDS } from './fragments';
 
 export const GET_REPOSITORIES = gql`
 ${CORE_REPOSITORY_FIELDS}
@@ -32,13 +32,57 @@ ${CORE_REPOSITORY_FIELDS}
 `;
 
 export const GET_USER = gql`
-  {
-    authorizedUser {
-      id
-      username
+${REVIEW_NODE_FIELDS}
+query getAuthorizedUser($includeReviews: Boolean = false) {
+  authorizedUser {
+    # user fields...
+    reviews @include(if: $includeReviews) {
+      edges {
+        node {
+          ...ReviewNodeFields
+          repository {
+            ownerName
+            fullName
+          }
+        }
+        cursor
+      }
+      pageInfo {
+        hasNextPage
+        startCursor
+        endCursor
+      }
     }
   }
+}
 `;
+
+/* export const GET_USER_REVIEWS = gql`
+
+query authorizedUser (
+  $first: Int
+  $after: String
+  ) {
+  authorizedUser {
+    reviews (
+      first: $first
+      after: $after
+      ){
+      edges {
+        node {
+          ...ReviewNodeFields
+        }
+        cursor
+      }
+      pageInfo {
+        hasNextPage
+        startCursor
+        endCursor
+      }
+    }
+  }
+}
+`; */
 
 export const GET_REPOSITORY_BY_ID = gql`
 ${CORE_REPOSITORY_FIELDS}

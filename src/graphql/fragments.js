@@ -13,3 +13,25 @@ export const CORE_REPOSITORY_FIELDS = gql`
     ownerAvatarUrl
   }
 `;
+/* 
+export const PAGEINFO_FIELDS = gql`
+  fragment PageInfoFields on PageInfo {
+    hasNextPage,
+    startCursor,
+    endCursor
+  }
+`; */
+
+export const REVIEW_NODE_FIELDS = gql`
+  fragment ReviewNodeFields on Review {
+    id
+    text
+    rating
+    createdAt
+    repositoryId
+    user {
+      id
+      username
+    }
+  }
+`;
